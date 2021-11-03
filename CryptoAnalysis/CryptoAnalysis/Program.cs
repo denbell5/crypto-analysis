@@ -9,13 +9,40 @@ namespace CryptoAnalysis
    {
       const string baseDir = @"C:\univ\4_1\zah\lab-4\texts";
 
-      static void Main(string[] args)
+      static void Main()
       {
-         while(true)
+         var alphabet = Alphabets.Values["u"];
+         while (true)
          {
-            Console.Write("Text name: ");
-            var textName = Console.ReadLine();
-            CalculateForText(textName);
+            Console.Write("Input: ");
+            var input = Console.ReadLine();
+            if (input.Contains("freq"))
+            {
+               var textName = input.Split(' ')[1];
+               CalculateForText(textName);
+            }
+            else if (input.Contains("decode"))
+            {
+               var args = input.Split(' ');
+               var a = int.Parse(args[1]);
+               var b = int.Parse(args[2]);
+              
+               var textName = args[3];
+               var text = File.ReadAllText($@"{baseDir}\{textName}\{textName}.txt");
+               var decoded = TextCypher.Decode(text, a, b, alphabet);
+               Console.WriteLine(decoded);
+            }
+            else if (input.Contains("chi"))
+            {
+               var ch = input.Split(' ')[1];
+               var index = alphabet.IndexOf(ch);
+               Console.WriteLine(index);
+            } 
+            else if (input.StartsWith("alpha"))
+            {
+               var alphabetKey = input.Split(' ')[1];
+               alphabet = Alphabets.Values[alphabetKey];
+            }
          }
       }
 
