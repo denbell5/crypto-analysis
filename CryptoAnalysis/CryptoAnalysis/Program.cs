@@ -58,9 +58,22 @@ namespace CryptoAnalysis
             $@"{baseDir}\{textName}\{textName}-result-{gramLength}-by-{orderedBy}-keys.txt",
             results.Select(pair => $"{pair.Key}").ToList()
          );
+         File.WriteAllText(
+            $@"{baseDir}\{textName}\{textName}-result-{gramLength}-by-{orderedBy}-keys-oneline.txt",
+            string.Join("", results.Select(pair => $"{pair.Key}"))
+         );
          File.WriteAllLines(
             $@"{baseDir}\{textName}\{textName}-result-{gramLength}-by-{orderedBy}-values.txt",
             results.Select(pair => $"{pair.Value}").ToList()
+         );
+         File.WriteAllText(
+            $@"{baseDir}\{textName}\{textName}-result-{gramLength}-by-{orderedBy}-values.csv",
+            string.Join("\n", results.Select(pair => $"{pair.Value}"))
+         );
+         var da = string.Join("\n", results.Select(pair => $"{pair.Key}"));
+         File.WriteAllText(
+           $@"{baseDir}\{textName}\{textName}-result-{gramLength}-by-{orderedBy}-keys.csv",
+           string.Join("\n", results.Select(pair => $"{pair.Key}"))
          );
       }
    }
