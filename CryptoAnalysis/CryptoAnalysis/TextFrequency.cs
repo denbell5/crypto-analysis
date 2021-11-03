@@ -8,7 +8,11 @@ namespace CryptoAnalysis
       public static HashSet<char> GetAlphabet(string text)
       {
          var alphabet = new HashSet<char>();
-         var distinct = text.ToCharArray().Distinct().Where(x => !char.IsControl(x)).ToList();
+         var distinct = text
+            .ToCharArray()
+            .Distinct()
+            .Where(x => x == ' ' || char.IsLetter(x))
+            .ToList();
          distinct.ForEach(ch => alphabet.Add(ch));
          return alphabet;
       }
